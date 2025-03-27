@@ -1,103 +1,140 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React from "react";
+import {
+  Button,
+  Input,
+  Card,
+  Modal,
+  Badge,
+  Switch,
+  Checkbox,
+  Select,
+  TextArea,
+  Text,
+  Range,
+  Image,
+} from "@/components/ui";
+
+const handleClick = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  alert("按鈕被點擊！");
+};
+
+const ComponentTestPage = () => {
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [switchOn, setSwitchOn] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
+  const [selectedOption, setSelectedOption] = React.useState("");
+
+  // Range 拉桿元件
+  const [rangeValue, setRangeValue] = React.useState(50);
+
+  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRangeValue(Number(e.target.value));
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="p-6 space-y-8">
+      <p className="text-3xl font-bold">🧪 CSS 元件測試頁面</p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <section>
+        <Text variant="header">這是 Header 字體</Text>
+        <Text variant="title">這是 Title 字體</Text>
+        <Text variant="context">這是 Context 字體</Text>
+        <Text variant="highlight">這是 醒目字體</Text>
+        <Text variant="subtext">這是 Subtext 字體</Text>
+      </section>
+
+      <section>
+        <Text variant="title">Button</Text>
+        <div className="flex gap-3">
+          <Button onClick={handleClick}>點擊我</Button>
+          <Button variant="warning" onClick={handleClick}>
+            點擊我
+          </Button>
+          <Button variant="cancel" onClick={handleClick}>
+            點擊我
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section>
+        <Text variant="title">Input</Text>
+        <div className="grid grid-cols-2 gap-2">
+          <Input placeholder="請輸入文字..." />
+          <div className="content-center">
+            <Text variant="subtext" className="text-center">
+              Range拉桿: {rangeValue}
+            </Text>
+            <Range
+              min={0}
+              max={100}
+              value={rangeValue}
+              onChange={handleRangeChange}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <Text variant="title">TextArea</Text>
+        <TextArea placeholder="這是一個多行輸入框..." />
+      </section>
+
+      <section>
+        <Text variant="title">Card</Text>
+        <Card className="space-y-4">
+          <Image src="https://picsum.photos/id/26/300/200"></Image>
+          <Text variant="highlight">這是一個簡單的卡片元件。</Text>
+        </Card>
+      </section>
+
+      <section>
+        <Text variant="title">Badge</Text>
+        <div className="flex gap-2">
+          <Badge>預設</Badge>
+          <Badge variant="success">成功</Badge>
+          <Badge variant="warning">警告</Badge>
+        </div>
+      </section>
+
+      <section>
+        <Text variant="title">Switch</Text>
+        <Switch checked={switchOn} onChange={setSwitchOn} />
+      </section>
+
+      <section>
+        <Text variant="title">Checkbox</Text>
+        <Checkbox
+          checked={checked}
+          onChange={setChecked}
+          label="我同意服務條款"
+        />
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">Select</h2>
+        <Select
+          value={selectedOption}
+          onChange={setSelectedOption}
+          options={[
+            { label: "選項一", value: "one" },
+            { label: "選項二", value: "two" },
+          ]}
+        />
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold mb-2">Modal</h2>
+        <Button onClick={() => setModalOpen(true)}>打開 Modal</Button>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <p>這是模態視窗的內容。</p>
+          <Button onClick={() => setModalOpen(false)}>關閉</Button>
+        </Modal>
+      </section>
+    </main>
   );
-}
+};
+
+export default ComponentTestPage;
