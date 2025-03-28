@@ -10,3 +10,6 @@ export { default as TextArea } from './TextArea';
 export { default as Text } from './Text';
 export { default as Range } from './Range';
 export { default as Image } from './Image';
+export { default as Alert } from './Alert';
+export { default as Slider } from './Slider';
+export { default as JapaneseText } from './JapaneseText';

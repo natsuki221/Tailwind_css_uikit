@@ -14,18 +14,22 @@ import {
   Text,
   Range,
   Image,
+  Alert,
+  Slider,
+  JapaneseText,
 } from "@/components/ui";
-
-const handleClick = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  alert("按鈕被點擊！");
-};
 
 const ComponentTestPage = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [switchOn, setSwitchOn] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
   const [selectedOption, setSelectedOption] = React.useState("");
+  const [showAlert, setShowAlert] = React.useState(false);
+
+  const handleClick = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    setShowAlert(true);
+  };
 
   // Range 拉桿元件
   const [rangeValue, setRangeValue] = React.useState(50);
@@ -34,9 +38,30 @@ const ComponentTestPage = () => {
     setRangeValue(Number(e.target.value));
   };
 
+  // Slider 輪播元件
+  const slides = [
+    <Card key="slide-1" className="space-y-4">
+      <Image src="https://picsum.photos/id/26/300/200" alt="Fake Photo"></Image>
+      <Text variant="highlight">這是一個簡單的卡片元件。</Text>
+    </Card>,
+    <Card key="slide-2" className="space-y-4">
+      <Image src="https://picsum.photos/id/27/300/200" alt="Fake Photo"></Image>
+      <Text variant="highlight">這是一個簡單的卡片元件。</Text>
+    </Card>,
+    <Card key="slide-3" className="space-y-4">
+      <Image src="https://picsum.photos/id/28/300/200" alt="Fake Photo"></Image>
+      <Text variant="highlight">這是一個簡單的卡片元件。</Text>
+    </Card>,
+  ];
+
   return (
     <main className="p-6 space-y-8">
-      <p className="text-3xl font-bold">🧪 CSS 元件測試頁面</p>
+      {showAlert && (
+        <Alert variant="info" onClose={() => setShowAlert(false)}>
+          <p className="text-lg font-medium">按鈕被點擊！</p>
+        </Alert>
+      )}
+      <Text variant="header" className="text-center">🧪 UI 元件測試頁面</Text>
 
       <section>
         <Text variant="header">這是 Header 字體</Text>
@@ -44,6 +69,7 @@ const ComponentTestPage = () => {
         <Text variant="context">這是 Context 字體</Text>
         <Text variant="highlight">這是 醒目字體</Text>
         <Text variant="subtext">這是 Subtext 字體</Text>
+        <JapaneseText variant="context">これは日本語のフォントです。</JapaneseText>
       </section>
 
       <section>
@@ -85,7 +111,10 @@ const ComponentTestPage = () => {
       <section>
         <Text variant="title">Card</Text>
         <Card className="space-y-4">
-          <Image src="https://picsum.photos/id/26/300/200"></Image>
+          <Image
+            src="https://picsum.photos/id/26/300/200"
+            alt="Fake Photo"
+          ></Image>
           <Text variant="highlight">這是一個簡單的卡片元件。</Text>
         </Card>
       </section>
@@ -130,9 +159,22 @@ const ComponentTestPage = () => {
         <Button onClick={() => setModalOpen(true)}>打開 Modal</Button>
         <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
           <p>這是模態視窗的內容。</p>
-          <Button onClick={() => setModalOpen(false)}>關閉</Button>
         </Modal>
       </section>
+
+      <section>
+        <Text variant="title">Slider</Text>
+        <Slider
+          slides={slides}
+          slidesToShow={1}
+          autoPlay
+          autoPlayInterval={4000}
+          enableDrag
+          dynamicHeight
+          className="mx-auto max-w-4xl"
+        />
+      </section>
+      <br />
     </main>
   );
 };

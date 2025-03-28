@@ -1,4 +1,5 @@
 // components/ui/Checkbox.tsx
+// components/ui/Checkbox.tsx
 'use client';
 import React from 'react';
 import clsx from 'clsx';
@@ -12,22 +13,22 @@ interface CheckboxProps {
 
 const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, label, className = '' }) => {
   return (
-    <label className={clsx('flex items-center gap-3 cursor-pointer relative', className)}>
-      {/* 背景陰影層 */}
-      <div className="absolute w-6 h-6 bg-gray-900 rounded-sm translate-x-1 translate-y-1 z-0" />
-
-      {/* 真正的 checkbox */}
+    <label className={clsx('flex items-center gap-3 cursor-pointer', className)}>
+      {/* 隱藏原生 checkbox，但保留在 DOM 中以確保無障礙性 */}
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
+        className="sr-only peer"
+      />
+      {/* 自定義的 checkbox 外觀：預設為白底，勾選時完全綠色填滿 */}
+      <div
         className={clsx(
-          'relative z-10 appearance-none w-6 h-6 border-[3px] border-gray-900 bg-white rounded-sm',
-          'checked:bg-[#4ee197] checked:border-gray-900 checked:shadow-[2px_2px_0_#000]',
-          'transition-all duration-200'
+          'w-6 h-6 border-[3px] rounded-sm transition-all duration-200',
+          'bg-white border-gray-900',
+          'peer-checked:bg-green-500 peer-checked:border-green-500'
         )}
       />
-
       {label && (
         <span className="text-lg font-medium select-none">{label}</span>
       )}

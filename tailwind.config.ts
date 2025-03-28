@@ -8,7 +8,11 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        custom: ['jf-openhuninn-2.1','Klee One', 'sans-serif'], // Replace 'YourCustomFont' with your font name
+      },
+    },
   },
   plugins: [],
 }
