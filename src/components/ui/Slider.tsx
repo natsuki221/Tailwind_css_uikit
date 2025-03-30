@@ -3,7 +3,8 @@ import React from "react";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import Button from "@/components/ui/Button";
-import { useInterval } from "@/hooks/useInterval"; // 如果你有此Hook，保留；沒有就自行實作或拿掉
+import { useInterval } from "@/hooks/useInterval";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface SliderProps {
   /** 每個 Slide 的內容 */
@@ -143,20 +144,22 @@ const Slider: React.FC<SliderProps> = ({
 
         {/* 主容器 */}
         <div className="relative z-10 border-[3px] border-gray-900 bg-[#fff4da] rounded-xl overflow-hidden py-4 px-2">
-          {/* 左/右 按鈕：改用圖示 & 固定在左右兩邊 */}
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20">
-            <Button size="sm" variant="cancel" onClick={handlePrev}>
-              <img src="chevron-left.svg" alt="Previous" />
-            </Button>
-          </div>
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20">
-            <Button size="sm" variant="warning" onClick={handleNext}>
-              <img src="chevron-right.svg" alt="Next" />
-            </Button>
+          <div className="hidden sm:block">
+            {/* 左/右 按鈕：改用圖示 & 固定在左右兩邊 */}
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20">
+              <Button size="xs" variant="cancel" onClick={handlePrev}>
+                <ChevronLeft />
+              </Button>
+            </div>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20">
+              <Button size="xs" variant="warning" onClick={handleNext}>
+                <ChevronRight />
+              </Button>
+            </div>
           </div>
 
           {/* Slides 區域 */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-4 p-2">
             {visibleSlides.map((slideContent, idx) => (
               <AnimatePresence key={currentIndex + "-" + idx} mode="popLayout">
                 <motion.div

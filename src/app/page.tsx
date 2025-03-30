@@ -18,6 +18,9 @@ import {
   Slider,
   JapaneseText,
 } from "@/components/ui";
+import AppLayout from "@/components/layout/AppLayout";
+import Table, { Column } from "@/components/ui/Table";
+// import { header } from "framer-motion/client";
 
 const ComponentTestPage = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -40,28 +43,52 @@ const ComponentTestPage = () => {
 
   // Slider 輪播元件
   const slides = [
-    <Card key="slide-1" className="space-y-4">
+    <Card shadow={false} key="slide-1" className="space-y-4">
       <Image src="https://picsum.photos/id/26/300/200" alt="Fake Photo"></Image>
       <Text variant="highlight">這是一個簡單的卡片元件。</Text>
     </Card>,
-    <Card key="slide-2" className="space-y-4">
+    <Card shadow={false} key="slide-2" className="space-y-4">
       <Image src="https://picsum.photos/id/27/300/200" alt="Fake Photo"></Image>
       <Text variant="highlight">這是一個簡單的卡片元件。</Text>
     </Card>,
-    <Card key="slide-3" className="space-y-4">
+    <Card shadow={false} key="slide-3" className="space-y-4">
       <Image src="https://picsum.photos/id/28/300/200" alt="Fake Photo"></Image>
       <Text variant="highlight">這是一個簡單的卡片元件。</Text>
     </Card>,
   ];
 
+  // Table 元件
+  interface Person {
+    id: number;
+    name: string;
+    email: string;
+  }
+
+  const columns: Column<Person>[] = [
+    { key: "id", header: "ID" },
+    { key: "name", header: "Name" },
+    { key: "email", header: "Email" },
+  ];
+
+  const data: Person[] = [
+    { id: 1, name: "Alice", email: "james.c.mcreynolds@example-pet-store.com" },
+    { id: 2, name: "Bob", email: "james.a.garfield@examplepetstore.com" },
+    { id: 3, name: "Charlie", email: "john.mckinley@examplepetstore.com" },
+    { id: 4, name: "David", email: "john.mckinley@examplepetstore.com" },
+    { id: 5, name: "Eve", email: "william.henry.moody@my-own-personal-domain.com" },
+    { id: 6, name: "Frank", email: "john.mckinley@examplepetstore.com" },
+  ];
+
   return (
-    <main className="p-6 space-y-8">
+    <AppLayout>
       {showAlert && (
         <Alert variant="info" onClose={() => setShowAlert(false)}>
           <p className="text-lg font-medium">按鈕被點擊！</p>
         </Alert>
       )}
-      <Text variant="header" className="text-center">🧪 UI 元件測試頁面</Text>
+      <Text variant="header" className="text-center mt-2 sm:mt-4">
+        🧪 UI 元件測試頁面
+      </Text>
 
       <section>
         <Text variant="header">這是 Header 字體</Text>
@@ -69,7 +96,9 @@ const ComponentTestPage = () => {
         <Text variant="context">這是 Context 字體</Text>
         <Text variant="highlight">這是 醒目字體</Text>
         <Text variant="subtext">這是 Subtext 字體</Text>
-        <JapaneseText variant="context">これは日本語のフォントです。</JapaneseText>
+        <JapaneseText variant="context">
+          これは日本語のフォントです。
+        </JapaneseText>
       </section>
 
       <section>
@@ -170,12 +199,15 @@ const ComponentTestPage = () => {
           autoPlay
           autoPlayInterval={4000}
           enableDrag
-          dynamicHeight
-          className="mx-auto max-w-4xl"
+          className="mx-auto max-w-4xl mb-2"
         />
       </section>
-      <br />
-    </main>
+
+      <section>
+        <Text variant="title">Table</Text>
+        <Table<Person> columns={columns} data={data} />
+      </section>
+    </AppLayout>
   );
 };
 

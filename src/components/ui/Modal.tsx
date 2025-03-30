@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
               <div className="relative z-20 p-8 border-[3px] border-gray-900 bg-[#fff4da] rounded-xl w-full h-full overflow-auto">
                 {children}
                 <div className="text-right mt-4">
-                  <Button onClick={onClose}>關閉</Button>
+                  <Button size="sm" onClick={onClose}>關閉</Button>
                 </div>
               </div>
             </div>

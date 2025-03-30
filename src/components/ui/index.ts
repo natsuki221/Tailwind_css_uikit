@@ -13,3 +13,7 @@ export { default as Image } from './Image';
 export { default as Alert } from './Alert';
 export { default as Slider } from './Slider';
 export { default as JapaneseText } from './JapaneseText';
+export { default as Sidebar } from './Sidebar';
+export { default as Navbar } from './Navbar';
+export { default as Table } from './Table';
+export { default as Footer } from './Footer';

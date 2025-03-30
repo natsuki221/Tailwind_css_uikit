@@ -1,4 +1,4 @@
-// Button.tsx (簡化示例)
+// components/ui/Badge.tsx
 'use client';
 import React, { useState } from 'react';
 import clsx from 'clsx';
@@ -6,7 +6,7 @@ import clsx from 'clsx';
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: 'default' | 'warning' | 'cancel';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'ico';
   onClick?: () => void | Promise<void>;
 }
 
@@ -17,9 +17,11 @@ const variantStyles = {
 };
 
 const sizeStyles = {
+  xs: 'py-1 px-1 text-xs',
   sm: 'py-2 px-4 text-sm',
   md: 'py-3.5 px-6 text-base',
   lg: 'py-4 px-8 text-xl',
+  ico: 'py-2 px-2 text-base',
 };
 
 const Button: React.FC<ButtonProps> = ({
