@@ -1,4 +1,4 @@
-// components/ui/Badge.tsx
+// components/ui/Button.tsx
 'use client';
 import React, { useState } from 'react';
 import clsx from 'clsx';
@@ -46,16 +46,18 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <div className="relative inline-block group">
-      {/* 2. 改大陰影位移 (2px 代替 1px) */}
-      <div className="absolute inset-0 bg-gray-800 rounded translate-y-1 translate-x-1 z-10" />
+    // 1) 使用 inline-flex + flex-shrink-0，避免父層 flex 擠壓，讓陰影不變形
+    <div className="relative inline-flex flex-shrink-0 group">
+      {/* 2) 絕對定位陰影層：inset-0 + pointer-events-none，以免干擾點擊 */}
+      <div className="absolute inset-0 bg-gray-800 rounded translate-y-1 translate-x-1 z-10 pointer-events-none" />
 
+      {/* 3) 按鈕本體：hover 時上移陰影 */}
       <button
         type="button"
         disabled={disabled || loading}
         onClick={handleClick}
         className={clsx(
-          'relative z-20 rounded border-[3px] border-gray-900 font-medium tracking-wide flex items-center justify-center group-hover:-translate-y-px group-hover:-translate-x-px ease-out duration-300',
+          'relative z-20 border-[3px] border-gray-900 rounded font-medium tracking-wide ease-out duration-300 flex items-center justify-center group-hover:-translate-y-px group-hover:-translate-x-px',
           variantStyles[variant],
           sizeStyles[size],
           { 'opacity-70 cursor-not-allowed': loading || disabled },
