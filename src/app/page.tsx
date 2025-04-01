@@ -97,7 +97,7 @@ const ComponentTestPage = () => {
           <p className="text-lg font-medium">按鈕被點擊！</p>
         </Alert>
       )}
-      <Text variant="header" className="text-center mt-2 sm:mt-4">
+      <Text variant="header" className="text-center mt-6 sm:mt-4" id="header">
         🧪 UI 元件測試頁面
       </Text>
 
@@ -208,7 +208,7 @@ const ComponentTestPage = () => {
         <Slider
           slides={slides}
           slidesToShow={1}
-          
+          autoPlay
           autoPlayInterval={4000}
           enableDrag
           className="mx-auto max-w-4xl mb-2"
