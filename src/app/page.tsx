@@ -44,15 +44,15 @@ const ComponentTestPage = () => {
   // Slider 輪播元件
   const slides = [
     <Card shadow={false} key="slide-1" className="space-y-4">
-      <Image src="https://picsum.photos/id/26/300/200" alt="Fake Photo"></Image>
+      <Image showShadow={false} src="https://picsum.photos/id/26/300/200" alt="Fake Photo"></Image>
       <Text variant="highlight">這是一個簡單的卡片元件。</Text>
     </Card>,
     <Card shadow={false} key="slide-2" className="space-y-4">
-      <Image src="https://picsum.photos/id/27/300/200" alt="Fake Photo"></Image>
+      <Image showShadow={false} src="https://picsum.photos/id/27/300/200" alt="Fake Photo"></Image>
       <Text variant="highlight">這是一個簡單的卡片元件。</Text>
     </Card>,
     <Card shadow={false} key="slide-3" className="space-y-4">
-      <Image src="https://picsum.photos/id/28/300/200" alt="Fake Photo"></Image>
+      <Image showShadow={false} src="https://picsum.photos/id/28/300/200" alt="Fake Photo"></Image>
       <Text variant="highlight">這是一個簡單的卡片元件。</Text>
     </Card>,
   ];
@@ -62,21 +62,32 @@ const ComponentTestPage = () => {
     id: number;
     name: string;
     email: string;
+    isVerified: boolean; // 新增驗證狀態屬性
   }
-
+  
   const columns: Column<Person>[] = [
     { key: "id", header: "ID" },
     { key: "name", header: "Name" },
     { key: "email", header: "Email" },
+    {
+      key: "isVerified", // 此 key 只是用作 React 的 key，不需要對應 Person 屬性
+      header: "Verification Status",
+      render: (row) =>
+        row.isVerified ? (
+          <Badge variant="success">✅ Verified</Badge>
+        ) : (
+          <Badge variant="warning">⚠️ Unverified</Badge>
+        ),
+    },
   ];
 
   const data: Person[] = [
-    { id: 1, name: "Alice", email: "james.c.mcreynolds@example-pet-store.com" },
-    { id: 2, name: "Bob", email: "james.a.garfield@examplepetstore.com" },
-    { id: 3, name: "Charlie", email: "john.mckinley@examplepetstore.com" },
-    { id: 4, name: "David", email: "john.mckinley@examplepetstore.com" },
-    { id: 5, name: "Eve", email: "william.henry.moody@my-own-personal-domain.com" },
-    { id: 6, name: "Frank", email: "john.mckinley@examplepetstore.com" },
+    { id: 1, name: "Alice", email: "james.c.mcreynolds@example-pet-store.com", isVerified: true },
+    { id: 2, name: "Bob", email: "james.a.garfield@examplepetstore.com", isVerified: false },
+    { id: 3, name: "Charlie", email: "john.mckinley@examplepetstore.com", isVerified: true },
+    { id: 4, name: "David", email: "john.mckinley@examplepetstore.com", isVerified: true },
+    { id: 5, name: "Eve", email: "william.henry.moody@my-own-personal-domain.com", isVerified: false },
+    { id: 6, name: "Frank", email: "john.mckinley@examplepetstore.com", isVerified: true },
   ];
 
   return (
@@ -143,6 +154,7 @@ const ComponentTestPage = () => {
           <Image
             src="https://picsum.photos/id/26/300/200"
             alt="Fake Photo"
+            showShadow={false}
           ></Image>
           <Text variant="highlight">這是一個簡單的卡片元件。</Text>
         </Card>
@@ -196,7 +208,7 @@ const ComponentTestPage = () => {
         <Slider
           slides={slides}
           slidesToShow={1}
-          autoPlay
+          
           autoPlayInterval={4000}
           enableDrag
           className="mx-auto max-w-4xl mb-2"

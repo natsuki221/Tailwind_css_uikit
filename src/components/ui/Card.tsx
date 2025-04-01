@@ -23,7 +23,7 @@ const Card: React.FC<React.PropsWithChildren<CardProps>> = ({
 
       <div
         className={clsx(
-          'rounded-xl relative z-20 pl-8 sm:pl-10 pr-8 sm:pr-16 py-8 border-[3px] border-gray-900 bg-[#fff4da]',
+          'rounded-xl relative z-20 pl-8 sm:pl-10 pr-8 sm:pr-10 py-8 border-[3px] border-gray-900 bg-[#fff4da]',
           className
         )}
         {...props}

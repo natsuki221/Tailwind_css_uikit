@@ -52,9 +52,9 @@ function Table<T>({ columns, data, className = "" }: TableProps<T>) {
       <div
         className={`border-[3px] border-gray-900 rounded-xl overflow-x-auto bg-[#fff4da] p-4 ${className}`}
       >
-        <table className="w-full text-left border-collapse">
+        <table className="w-full text-left border-[2px] border-gray-900">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-[#ffc380]/70">
               {columns.map((col) => (
                 <th
                   key={String(col.key)}
